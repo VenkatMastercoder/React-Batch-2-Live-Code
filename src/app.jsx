@@ -1,53 +1,111 @@
-import ReactDOM from "react-dom";
+/* eslint-disable react/prop-types */
+import ReactDOM from "react-dom/client";
 import "./app.css";
+import CardImage from "./assets/Card-Image.avif";
+import { v4 as uuidv4 } from "uuid";
+
+// default Import
+import Header from "./component/Header/Header";
+import Footer from "./component/Footer/Footer";
+import cardImage from "./assets/images";
+import CardComponent from "./component/CardComponent/CardComponent"
+
+// Named Import
+import { cardImage2 } from "./assets/images";
+import HeroSection from "./component/HeroSection/HeroSection";
 
 const testElement = <p>Test</p>;
 
-const Header = () => {
-  return <p>Header Component</p>;
-};
 
-const Footer = () => {
-  return <p>Footer Component</p>;
-};
+/*
+  Prop ==> Property in React 
 
-const HeroSection = () => {
-  return (
-    <>
-      <div className="2xl:container mx-auto py-5">
-        <div className="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex flex-col justify-center items-center">
-            <img src="https://img.freepik.com/free-photo/interior-shot-cafe-with-chairs-near-bar-with-wooden-tables_181624-1669.jpg?t=st=1711900559~exp=1711904159~hmac=99727b38f230869dcfee70f34d223c55023828c965997516aefec5464f2a67fd&w=1380" className="h-80" />
-          </div>
+  1. How to use Prop or Pass Props
+    -  name="The Red Box" or name={"The Red Box"}
 
-          <div className="flex flex-col justify-center items-start gap-4">
-            <h1 className="text-4xl">Welcome to Food Store</h1>
-            <p className="text-lg">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-              distinctio tempora exercitationem dicta natus, veritatis, fugit
-              minima unde aperiam minus assumenda aliquam, deleniti laboriosam
-              vel rerum? Culpa aut nostrum voluptatum?
-            </p>
-            <button className="bg-green-500 px-8 py-2 rounded-lg">Buy Now</button>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+  2. How to Rev the Props we Send
+    - const CardComponent = (props) => {} : props = { name: ""The Red Box""}
+
+  3. How to Render
+    - {props.name}
+
+  4. destructing On fly
+    - - const { name, timing, rating, address } = props;
+*/
+/*
+  - List 
+    - How to List 
+      - const mockData = [
+      {
+        name:"The Red Box",
+        rating:"3.8",
+        timing:"20-25",
+        address:"Anna Nagar"
+      }
+    ]
+
+    - How Render the List 
+      - {
+        mockData.map((e)=>{
+          return (
+            <CardComponent data={e} />
+          )
+        })
+      }
+    
+    - key 
+      - mockdata = "Unqi id"
+      - index - ❌ 
+      - uuid -✅ 
+*/
+
+const mockData = [
+  {
+    name: "The Red Box",
+    rating: "3.8",
+    timing: "20-25",
+    address: "Anna Nagar",
+  },
+  {
+    name: "KCF",
+    rating: "3.8",
+    timing: "20-25",
+    address: "Anna Nagar",
+  },
+  {
+    name: "XYZ",
+    rating: "3.8",
+    timing: "20-25",
+    address: "Anna Nagar",
+  },
+  {
+    name: "MockAbc",
+    rating: "3.8",
+    timing: "20-25",
+    address: "Anna Nagar",
+  },
+  {
+    name: "MockAbc",
+    rating: "3.8",
+    timing: "20-25",
+    address: "Anna Nagar",
+  },
+];
 
 const Body = () => {
   return (
     <>
       <Header />
       <HeroSection />
-      <p className="paragraph">Card</p>
+      {mockData.map((e) => {
+        return <CardComponent key={uuidv4()} data={e} />;
+      })}
       <p className="bg-red-500">Tailwind CSS</p>
       <Footer />
     </>
   );
 };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root")); // Root Dom
 
-root.render(<Body />);
+root.render(<Body />); // What to Render
